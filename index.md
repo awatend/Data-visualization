@@ -6,6 +6,6 @@ title: SFI-Harvest compain 2025
 
 Interactive map of Calanus finmarchicus concentrations.
 
-<iframe src="calanus_plot21.html" width="100%" height="800px" style="border:none;"></iframe>
+<iframe src="calanus_density_red.html" width="100%" height="800px" style="border:none;"></iframe>
 
 !
