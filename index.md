@@ -2,7 +2,7 @@
 title: SFI-Harvest compain 2025
 ---
 
-# Welcome to My Calanus Data Visualization
+# Welcome to  Calanus Data Visualization
 
 Interactive map of Calanus finmarchicus concentrations.
 
