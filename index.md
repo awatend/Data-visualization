@@ -8,4 +8,3 @@ Interactive map of Calanus finmarchicus concentrations.
 
 <iframe src="calanus_density_red.html" width="100%" height="800px" style="border:none;"></iframe>
 
-!
