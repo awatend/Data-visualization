@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Formal Verification of Robotic Behavior Trees</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            max-height: 400px;
+        }
+        .flow-arrow {
+            position: relative;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .flow-arrow::after {
+            content: '↓';
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0582CA;
+        }
+        .bt-node {
+            transition: background-color 0.5s ease-in-out;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            color: white;
+            font-weight: 600;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #003554;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#003554] uppercase tracking-wide">The Trust Mandate</h1>
+            <p class="mt-4 text-xl md:text-2xl text-[#0582CA] max-w-4xl mx-auto">Formal Verification for Mission-Critical Robotic Behavior</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <section class="md:col-span-2 bg-white rounded-xl shadow-xl p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-3xl font-bold text-[#003554]">The Ambiguity Gap in Modern Robotics</h2>
+                            <button class="bg-[#FBB13C] text-[#003554] px-4 py-2 rounded-lg font-semibold hover:bg-[#FFC966] transition duration-200 elaborate-btn" data-concept-title="The Ambiguity Gap" data-concept-text="Behavior Trees (BTs) are a dominant paradigm for programming complex robot actions due to their modularity and flexibility. However, a critical weakness persists: the lack of a standardized, formal definition for their behavior. This 'ambiguity gap' means that crucial operational semantics—how tasks run, halt, or handle data—are often left to interpretation. For robots in critical applications, from autonomous drones to surgical assistants, this ambiguity is unacceptable. It prevents rigorous mathematical proof of safety and reliability, creating a fundamental barrier to trust.">✨ Elaborate</button>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Behavior Trees (BTs) are a dominant paradigm for programming complex robot actions due to their modularity and flexibility. However, a critical weakness persists: the lack of a standardized, formal definition for their behavior. This "ambiguity gap" means that crucial operational semantics—how tasks run, halt, or handle data—are often left to interpretation. For robots in critical applications, from autonomous drones to surgical assistants, this ambiguity is unacceptable. It prevents rigorous mathematical proof of safety and reliability, creating a fundamental barrier to trust.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-8xl font-black text-[#FBB13C]">?</div>
+                        <p class="mt-2 text-xl font-semibold text-[#006494]">Informal Semantics</p>
+                        <p class="text-gray-500">A Barrier to Provable Safety</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-2 bg-white rounded-xl shadow-xl p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-bold text-[#003554] text-center w-full">A "Single Source of Truth" for Verification and Execution</h2>
+                    <button class="bg-[#FBB13C] text-[#003554] px-4 py-2 rounded-lg font-semibold hover:bg-[#FFC966] transition duration-200 elaborate-btn" data-concept-title="Single Source of Truth" data-concept-text="To solve this, we introduce a framework that automatically translates Behavior Trees into a formal language (FIACRE). This creates a single, verifiable model that is used for both rigorous offline analysis and direct online execution. What we prove at design time is exactly what runs on the robot, eliminating the gap between specification and implementation.">✨ Elaborate</button>
+                </div>
+                 <p class="text-gray-600 text-center leading-relaxed max-w-3xl mx-auto mb-12">
+                    To solve this, we introduce a framework that automatically translates Behavior Trees into a formal language (FIACRE). This creates a single, verifiable model that is used for both rigorous offline analysis and direct online execution. What we prove at design time is exactly what runs on the robot, eliminating the gap between specification and implementation.
+                </p>
+
+                <div class="w-full overflow-x-auto p-4">
+                    <div class="flex flex-col md:flex-row items-center justify-around space-y-8 md:space-y-0 md:space-x-8 text-center">
+
+                        <div class="flex flex-col items-center">
+                            <div class="p-6 bg-[#00A6FB] text-white rounded-lg shadow-lg w-48">
+                                <span class="text-4xl">🌳</span>
+                                <h3 class="text-lg font-bold mt-2">Behavior Tree</h3>
+                                <p class="text-sm font-light">(Programmer's Logic)</p>
+                            </div>
+                        </div>
+
+                        <div class="text-4xl font-bold text-[#0582CA] transform md:rotate-0 rotate-90">&rarr;</div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="p-6 bg-[#0582CA] text-white rounded-lg shadow-lg w-48">
+                                <span class="text-4xl">📜</span>
+                                <h3 class="text-lg font-bold mt-2">FIACRE Model</h3>
+                                <p class="text-sm font-light">(Formal Semantics)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-4xl font-bold text-[#006494] transform md:rotate-0 rotate-90">&rarr;</div>
+
+                        <div class="flex flex-col items-center space-y-4">
+                            <div class="p-6 bg-[#006494] text-white rounded-lg shadow-lg w-48">
+                                <span class="text-4xl">🔬</span>
+                                <h3 class="text-lg font-bold mt-2">Offline Verification</h3>
+                                <p class="text-sm font-light">(TINA Toolbox)</p>
+                            </div>
+                             <div class="p-6 bg-[#003554] text-white rounded-lg shadow-lg w-48">
+                                <span class="text-4xl">🚀</span>
+                                <h3 class="text-lg font-bold mt-2">Online Execution</h3>
+                                <p class="text-sm font-light">(HIPPO Engine)</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-[#003554] mb-4">Offline Analysis: Proving Correctness</h2>
+                 <p class="text-gray-600 leading-relaxed mb-6">
+                    Before deployment, the TINA toolbox analyzes the formal model to mathematically prove critical properties. The `sift` tool explores every possible state the system can enter, while the `selt` tool checks these states against safety and liveness rules written in Linear Temporal Logic (LTL).
+                </p>
+                <div class="chart-container">
+                    <canvas id="verificationPropertiesChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-500 text-center mt-4">Verification results from the UAV drone case study demonstrate the ability to formally prove critical safety properties are always met.</p>
+            </section>
+            
+            <section class="bg-white rounded-xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-[#003554] mb-4">Online Execution: Validated Behavior</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    The HIPPO engine executes the very same formal model on the robot. This ensures the verified behavior is what actually occurs. Visual feedback provides real-time insight into the BT's execution flow, with nodes changing color to reflect their status: Ticked, Running, Success, or Failure.
+                </p>
+                <div class="bg-gray-200 p-6 rounded-lg">
+                    <div id="bt-simulation" class="space-y-2">
+                         <div class="flex items-center space-x-4">
+                            <div id="node-root" class="bt-node">Drone Mission (Fallback)</div>
+                        </div>
+                         <div class="flex items-center space-x-4 pl-8">
+                             <div class="text-xl">↳</div>
+                            <div id="node-seq1" class="bt-node">Safety Checks (Sequence)</div>
+                        </div>
+                        <div class="flex items-center space-x-4 pl-16">
+                             <div class="text-xl">↳</div>
+                            <div id="node-battery" class="bt-node">Check Battery</div>
+                        </div>
+                        <div class="flex items-center space-x-4 pl-16">
+                            <div class="text-xl">↳</div>
+                            <div id="node-nav" class="bt-node">Check Navigation</div>
+                        </div>
+                         <div class="flex items-center space-x-4 pl-8">
+                             <div class="text-xl">↳</div>
+                            <div id="node-action" class="bt-node">Execute Survey (Action)</div>
+                        </div>
+                    </div>
+                </div>
+                 <p class="text-sm text-gray-500 text-center mt-4">Simplified representation of a BT execution flow. Colors dynamically indicate node status during runtime.</p>
+            </section>
+            
+            <section class="md:col-span-2 bg-white rounded-xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-[#003554] text-center mb-2">Case Study: Unmanned Aerial Vehicle (UAV)</h2>
+                <p class="text-gray-600 text-center leading-relaxed max-w-3xl mx-auto mb-8">
+                    An autonomous survey drone's BT was analyzed. The framework successfully verified complex interactions and safety-critical logic, handling a massive state space to provide mathematical guarantees of correct behavior.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                         <div class="text-center mb-8">
+                            <p class="text-6xl md:text-8xl font-black text-[#00A6FB]">267M+</p>
+                            <p class="text-xl font-semibold text-[#006494]">Transitions Analyzed</p>
+                            <p class="text-gray-500">in 76 minutes</p>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                           The analysis covered every possible interleaving of actions, ensuring that even in complex scenarios, the drone would behave as expected. Properties like "the drone must land if battery is critical" and "the drone must not fly above 6 meters" were proven to be true under all conditions.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="uavStateSpaceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-2 bg-white rounded-xl shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-[#003554] text-center mb-2">Case Study: ROS2 Nav2 Custom Nodes</h2>
+                <p class="text-gray-600 text-center leading-relaxed max-w-3xl mx-auto mb-8">
+                   The framework isn't limited to standard BTs. We extended it to verify custom nodes from the popular ROS2 Nav2 stack, such as the `Recovery` node. This demonstrates the ability to formally prove the correctness of new, domain-specific extensions.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#006494] mb-4">Verifying the `Recovery` Node Logic</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            The `Recovery` node is designed to retry a primary action if it fails, by executing a secondary recovery action. We formally proved its logic: if the primary action fails, the recovery action is triggered. If the recovery succeeds, the primary action is retried. If the recovery action itself fails, the entire node correctly reports failure.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="nav2RecoveryChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-[#E0F2F7] rounded-xl shadow-xl p-8 text-center">
+                <h2 class="text-3xl font-bold text-[#003554] mb-6">✨ Ask an Expert: AI-Powered Insights</h2>
+                <p class="text-gray-600 leading-relaxed mb-6 max-w-3xl mx-auto">
+                    Have more questions about formal verification, Behavior Trees, or robotics? Ask our AI expert for immediate insights!
+                </p>
+                <div class="flex flex-col items-center">
+                    <textarea id="ai-question" class="w-full md:w-3/4 p-4 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A6FB] outline-none text-gray-700" rows="4" placeholder="e.g., What are the main benefits of using formal methods in robotics?"></textarea>
+                    <button id="ask-ai-btn" class="bg-[#00A6FB] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#0582CA] transition duration-200 shadow-md">✨ Ask Question</button>
+                    <div id="ai-answer" class="mt-6 p-6 bg-white rounded-lg shadow-inner w-full md:w-3/4 text-left hidden">
+                        <p class="text-gray-700 leading-relaxed" id="ai-answer-text"></p>
+                        <div id="ai-loading" class="hidden text-center text-[#006494] font-semibold mt-4">Generating response...</div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+        
+        <footer class="text-center mt-16 py-8 border-t border-gray-300">
+            <p class="text-2xl font-bold text-[#003554]">The Future is Formally Verified</p>
+            <p class="text-gray-600 mt-2 max-w-3xl mx-auto">By integrating formal methods directly into the robotics development lifecycle, we build systems that are not just capable, but provably safe and trustworthy.</p>
+        </footer>
+
+    </div>
+
+    <!-- Modal for Elaborate Feature -->
+    <div id="explanation-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button" id="close-modal">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold text-[#003554] mb-4"></h3>
+            <div id="modal-loading" class="hidden text-center text-[#006494] font-semibold">Generating explanation...</div>
+            <p id="modal-text" class="text-gray-700 leading-relaxed"></p>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const colorPalette = {
+        blue: '#00A6FB',
+        darkBlue: '#0582CA',
+        deepBlue: '#006494',
+        navy: '#003554',
+        accent: '#FBB13C',
+        success: 'rgba(75, 192, 192, 0.8)',
+        failure: 'rgba(255, 99, 132, 0.8)',
+        running: 'rgba(255, 206, 86, 0.8)',
+        white: '#FFFFFF'
+    };
+
+    const wrapLabel = (str, maxLen = 16) => {
+        if (str.length <= maxLen) {
+            return str;
+        }
+        const words = str.split(' ');
+        const lines = [];
+        let currentLine = '';
+        for (const word of words) {
+            if ((currentLine + word).length > maxLen) {
+                lines.push(currentLine.trim());
+                currentLine = '';
+            }
+            currentLine += word + ' ';
+        }
+        lines.push(currentLine.trim());
+        return lines;
+    };
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        return Array.isArray(label) ? label.join(' ') : label;
+    };
+    
+    const defaultChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    color: colorPalette.navy,
+                    font: {
+                        weight: '600'
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: '#e5e7eb'
+                },
+                ticks: {
+                    color: colorPalette.navy,
+                    font: {
+                        weight: '600'
+                    }
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: colorPalette.navy,
+                    font: {
+                        weight: '600'
+                    }
+                }
+            }
+        }
+    };
+
+    const verificationPropertiesCtx = document.getElementById('verificationPropertiesChart').getContext('2d');
+    new Chart(verificationPropertiesCtx, {
+        type: 'bar',
+        data: {
+            labels: [
+                wrapLabel('Land if Battery Critical'), 
+                wrapLabel('Go to Station if Battery Low'),
+                wrapLabel('Land if Localization Fails'), 
+                wrapLabel('Fly No Higher Than 6m')
+            ],
+            datasets: [{
+                label: 'Property Verification Status',
+                data: [1, 1, 1, 1],
+                backgroundColor: [
+                    colorPalette.success,
+                    colorPalette.success,
+                    colorPalette.success,
+                    colorPalette.success,
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...defaultChartOptions,
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function(value) {
+                            return value === 1 ? 'PROVEN TRUE' : 'FALSE';
+                        },
+                        max: 1,
+                        min: 0,
+                        stepSize: 1,
+                        color: colorPalette.navy,
+                        font: { weight: 'bold' }
+                    },
+                     grid: { color: '#e5e7eb' },
+                },
+                x: { ...defaultChartOptions.scales.x }
+            }
+        }
+    });
+
+    const uavStateSpaceCtx = document.getElementById('uavStateSpaceChart').getContext('2d');
+    new Chart(uavStateSpaceCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Classes (States)', 'Transitions (Paths)'],
+            datasets: [{
+                label: 'UAV State Space Complexity',
+                data: [49196302, 267702880],
+                backgroundColor: [
+                    colorPalette.darkBlue,
+                    colorPalette.accent,
+                ],
+                borderColor: colorPalette.white,
+                borderWidth: 4,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                     labels: { color: colorPalette.navy, font: { weight: '600' } }
+                },
+                tooltip: {
+                     callbacks: {
+                         label: function(context) {
+                             let label = context.label || '';
+                             if (label) {
+                                 label += ': ';
+                             }
+                             if (context.parsed !== null) {
+                                 label += new Intl.NumberFormat('en-US').format(context.parsed);
+                             }
+                             return label;
+                         }
+                     }
+                }
+            }
+        }
+    });
+
+    const nav2RecoveryCtx = document.getElementById('nav2RecoveryChart').getContext('2d');
+    new Chart(nav2RecoveryCtx, {
+        type: 'bar',
+        data: {
+            labels: [
+                wrapLabel('Action Fails -> Recovery Tries Again'), 
+                wrapLabel('Recovery Fails -> Node Fails'),
+                wrapLabel('Action Succeeds -> Node Succeeds')
+            ],
+            datasets: [{
+                label: 'Recovery Node Logic',
+                data: [1, 1, 1],
+                 backgroundColor: [
+                    colorPalette.success,
+                    colorPalette.success,
+                    colorPalette.success,
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...defaultChartOptions,
+            indexAxis: 'y',
+             scales: {
+                x: {
+                    ticks: {
+                        callback: function(value) {
+                            return value === 1 ? 'PROVEN TRUE' : 'FALSE';
+                        },
+                        max: 1,
+                        min: 0,
+                        stepSize: 1,
+                         color: colorPalette.navy,
+                         font: { weight: 'bold' }
+                    },
+                    grid: { color: '#e5e7eb' }
+                },
+                y: { ...defaultChartOptions.scales.y, grid: { display: false } }
+            }
+        }
+    });
+    
+    const btNodes = {
+        root: document.getElementById('node-root'),
+        seq1: document.getElementById('node-seq1'),
+        battery: document.getElementById('node-battery'),
+        nav: document.getElementById('node-nav'),
+        action: document.getElementById('node-action')
+    };
+    
+    const simulationStates = [
+        { node: btNodes.root, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.seq1, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.battery, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.battery, color: colorPalette.success, text: 'Success' },
+        { node: btNodes.nav, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.nav, color: colorPalette.success, text: 'Success' },
+        { node: btNodes.seq1, color: colorPalette.success, text: 'Success' },
+        { node: btNodes.action, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.action, color: colorPalette.running, text: 'Running...' },
+        { node: btNodes.root, color: colorPalette.running, text: 'Running...' },
+        { node: btNodes.action, color: colorPalette.darkBlue, text: 'Ticking...' },
+        { node: btNodes.action, color: colorPalette.success, text: 'Success' },
+        { node: btNodes.root, color: colorPalette.success, text: 'Success' },
+    ];
+    
+    let simIndex = 0;
+    
+    const resetSimulation = () => {
+        Object.values(btNodes).forEach(node => {
+            const originalText = node.id.replace('node-', '').replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            const type = node.id.includes('action') ? ' (Action)' : node.id.includes('seq') ? ' (Sequence)' : node.id.includes('root') ? ' (Fallback)' : '';
+            node.style.backgroundColor = '#9ca3af'; 
+            node.textContent = `${originalText}${type}`;
+        });
+    };
+
+    setInterval(() => {
+        if (simIndex >= simulationStates.length) {
+            simIndex = 0;
+            resetSimulation();
+            return;
+        }
+        
+        const state = simulationStates[simIndex];
+        const { node, color, text } = state;
+        
+        node.style.backgroundColor = color;
+        
+        const originalText = node.id.replace('node-', '').replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        const type = node.id.includes('action') ? ' (Action)' : node.id.includes('seq') ? ' (Sequence)' : node.id.includes('root') ? ' (Fallback)' : '';
+        node.textContent = `${originalText}${type} - ${text}`;
+
+        simIndex++;
+    }, 1500);
+    
+    resetSimulation();
+
+    // Gemini API Integration
+    const apiKey = ""; 
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    const explanationModal = document.getElementById('explanation-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalText = document.getElementById('modal-text');
+    const modalLoading = document.getElementById('modal-loading');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    const showModal = (title, content) => {
+        modalTitle.textContent = title;
+        modalText.textContent = content;
+        explanationModal.classList.add('show');
+    };
+
+    const hideModal = () => {
+        explanationModal.classList.remove('show');
+        modalText.textContent = '';
+        modalLoading.classList.add('hidden');
+    };
+
+    closeModalBtn.addEventListener('click', hideModal);
+    explanationModal.addEventListener('click', (e) => {
+        if (e.target === explanationModal) {
+            hideModal();
+        }
+    });
+
+    document.querySelectorAll('.elaborate-btn').forEach(button => {
+        button.addEventListener('click', async (e) => {
+            const conceptTitle = e.target.dataset.conceptTitle;
+            const conceptText = e.target.dataset.conceptText;
+
+            showModal(`Elaborating on: ${conceptTitle}`, '');
+            modalLoading.classList.remove('hidden');
+            modalText.classList.add('hidden');
+
+            try {
+                let chatHistory = [];
+                const prompt = `Please elaborate on this concept in simple terms, suitable for a technical infographic: "${conceptText}"`;
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    modalText.textContent = text;
+                } else {
+                    modalText.textContent = "Could not generate an explanation. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                modalText.textContent = "An error occurred while fetching the explanation. Please check your network connection.";
+            } finally {
+                modalLoading.classList.add('hidden');
+                modalText.classList.remove('hidden');
+            }
+        });
+    });
+
+    const aiQuestionInput = document.getElementById('ai-question');
+    const askAiButton = document.getElementById('ask-ai-btn');
+    const aiAnswerDiv = document.getElementById('ai-answer');
+    const aiAnswerText = document.getElementById('ai-answer-text');
+    const aiLoadingIndicator = document.getElementById('ai-loading');
+
+    askAiButton.addEventListener('click', async () => {
+        const question = aiQuestionInput.value.trim();
+        if (!question) {
+            aiAnswerText.textContent = "Please enter a question.";
+            aiAnswerDiv.classList.remove('hidden');
+            return;
+        }
+
+        aiAnswerText.textContent = '';
+        aiAnswerDiv.classList.remove('hidden');
+        aiLoadingIndicator.classList.remove('hidden');
+        askAiButton.disabled = true;
+
+        try {
+            let chatHistory = [];
+            const prompt = `Answer the following question about formal verification in robotics or Behavior Trees, based on a deep research report, in a concise and informative way: "${question}"`;
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content[0].parts.length > 0) {
+                const text = result.candidates[0].content.parts[0].text;
+                aiAnswerText.textContent = text;
+            } else {
+                aiAnswerText.textContent = "I couldn't find an answer to that question. Please try rephrasing.";
+            }
+        } catch (error) {
+            console.error("Error calling Gemini API:", error);
+            aiAnswerText.textContent = "An error occurred while fetching the answer. Please try again later.";
+        } finally {
+            aiLoadingIndicator.classList.add('hidden');
+            askAiButton.disabled = false;
+        }
+    });
+});
+</script>
+</body>
+</html>
